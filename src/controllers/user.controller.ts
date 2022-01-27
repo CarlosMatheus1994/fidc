@@ -2,7 +2,7 @@
 
 
 import {Filter, repository} from '@loopback/repository';
-import {get, param} from '@loopback/rest';
+import {get, getModelSchemaRef, param, post, requestBody} from '@loopback/rest';
 import {Users} from '../models';
 import {UsersRepository} from '../repositories';
 
@@ -30,6 +30,29 @@ export class UserController {
     @param.filter(Users) filter?: Filter<Users>,
   ): Promise<Users[]> {
     return this.usersRepository.find(filter)
+  }
+
+  @post('/users', {
+    responses: {
+      '200': {
+        description: 'sisprenatal model instance',
+        content: {'application/json': {schema: getModelSchemaRef(Users)}},
+      },
+    },
+  })
+  async create(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Users, {
+            exclude: ['id'],
+          }),
+        },
+      },
+    })
+    users: Omit<Users, 'id'>,
+  ): Promise<Users> {
+    return this.usersRepository.create(users);
   }
 
 

@@ -1,0 +1,18 @@
+{
+  "defaultEnv": "local",
+  "local": {
+    "driver": "mysql",
+    "host": {
+      "ENV": "localhost"
+    },
+    "port": {
+      "ENV": "3306"
+    },
+    "user": {
+      "ENV": "root"
+    },
+    "password": {
+      "ENV": "password"
+    }
+  }
+}

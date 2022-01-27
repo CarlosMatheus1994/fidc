@@ -4,12 +4,11 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'connection',
   connector: 'mysql',
-  url: '',
-  host: 'DESKTOP-FETL00O',
+  host: 'localhost',
   port: 3306,
-  user: 'admin',
-  password: 'fidc2022@',
-  database: 'fidc-DB'
+  user: 'root',
+  password: 'password',
+  database: 'fidc'
 };
 
 // Observe application's life cycle to disconnect the datasource when

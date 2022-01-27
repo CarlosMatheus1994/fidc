@@ -3,10 +3,10 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     mysql: {
-      schema: 'fidc',
+      database: 'fidc',
       table: 'users'
     },
-    strict: false,
+    strict: true,
   },
 })
 export class Users extends Entity {
@@ -25,11 +25,11 @@ export class Users extends Entity {
   razaoSocial: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
     name: 'cnpj',
   })
-  cnpj: number;
+  cnpj: string;
 
   @property({
     type: 'date',
@@ -39,18 +39,18 @@ export class Users extends Entity {
   dataAbertura: Date;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
     name: 'telefone',
   })
-  telefone: number;
+  telefone: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
     name: 'faturamento',
   })
-  faturamento: number;
+  faturamento: string;
 
 
   [prop: string]: any;
