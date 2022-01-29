@@ -52,6 +52,27 @@ export class Users extends Entity {
   })
   faturamento: string;
 
+  @property({
+    type: 'boolean',
+    required: true,
+    name: 'deactivate',
+  })
+  deactivate: boolean;
+
+  @property({
+    type: 'string',
+    required: true,
+    name: 'username',
+  })
+  username: string;
+
+  @property({
+    type: 'string',
+    required: true,
+    name: 'senha',
+  })
+  senha: string;
+
 
   [prop: string]: any;
 
