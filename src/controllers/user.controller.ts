@@ -1,7 +1,7 @@
 // Uncomment these imports to begin using these cool features!
 
 
-import {Count, Filter, FilterExcludingWhere, repository, Where} from '@loopback/repository';
+import {Count, Filter, repository, Where, WhereBuilder} from '@loopback/repository';
 import {get, getModelSchemaRef, param, patch, post, requestBody} from '@loopback/rest';
 import {Users} from '../models';
 import {UsersRepository} from '../repositories';
@@ -76,8 +76,16 @@ export class UserController {
       },
     })
     usersUpdate: Users,
+    @param.path.number('id') id: number,
     @param.where(Users) where?: Where<Users>,
   ): Promise<Count> {
+
+    where = new WhereBuilder(where)
+      .impose({
+        id
+      })
+      .build();
+
     return this.usersRepository.updateAll(usersUpdate, where);
   }
 
@@ -92,12 +100,9 @@ export class UserController {
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(Users, {exclude: 'where'})
-    filter?: FilterExcludingWhere<Users>,
   ): Promise<Users> {
     return this.usersRepository.findById(id);
   }
-
 
 }
 

@@ -2,4 +2,4 @@
 
 # npm run db:migrate
 
-# npm run start:watch
+npm run start:watch
