@@ -2,7 +2,7 @@
 
 
 import {Count, Filter, repository, Where, WhereBuilder} from '@loopback/repository';
-import {get, getModelSchemaRef, param, patch, post, requestBody} from '@loopback/rest';
+import {del, get, getModelSchemaRef, param, patch, post, requestBody} from '@loopback/rest';
 import {Users} from '../models';
 import {UsersRepository} from '../repositories';
 
@@ -26,7 +26,7 @@ export class UserController {
   })
   async find(
     @param.filter(Users) filter?: Filter<Users>,
-  ): Promise<Users[]> {
+  ): Promise<Users> {
     return this.usersRepository.find(filter)
   }
 
@@ -104,7 +104,22 @@ export class UserController {
     return this.usersRepository.findById(id);
   }
 
+  //Deleta usuários por Id.
+  @del('/users/{id}', {
+    responses: {
+      '204': {
+        description: 'User DELETE success',
+      },
+    },
+  })
+  async deleteById(
+    @param.path.number('id') id: number,
+  ): Promise<void> {
+    return this.usersRepository.deleteById(id);
+  }
 }
+
+
 
 
 
